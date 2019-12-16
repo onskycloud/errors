@@ -7,7 +7,8 @@ import (
 	"fmt"
 	"net/http"
 )
-
+// RedisEmpty redis empty value response
+const RedisEmpty = "redis: nil"
 // Error implements the error interface.
 type Error struct {
 	Id     string `json:"id"`
