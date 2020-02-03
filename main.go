@@ -7,8 +7,10 @@ import (
 	"fmt"
 	"net/http"
 )
+
 // RedisEmpty redis empty value response
 const RedisEmpty = "redis: nil"
+
 // Error implements the error interface.
 type Error struct {
 	Id     string `json:"id"`
@@ -120,5 +122,45 @@ func InternalServerError(id, format string, a ...interface{}) error {
 		Code:   500,
 		Detail: fmt.Sprintf(format, a...),
 		Status: http.StatusText(500),
+	}
+}
+
+// Created generates a 20x response code.
+func Created(id, format string, a ...interface{}) error {
+	return &Error{
+		Id:     id,
+		Code:   201,
+		Detail: fmt.Sprintf(format, a...),
+		Status: http.StatusText(201),
+	}
+}
+
+// Accepted generates a 20x response code.
+func Accepted(id, format string, a ...interface{}) error {
+	return &Error{
+		Id:     id,
+		Code:   202,
+		Detail: fmt.Sprintf(format, a...),
+		Status: http.StatusText(202),
+	}
+}
+
+// NoContent generates a 20x response code.
+func NoContent(id, format string, a ...interface{}) error {
+	return &Error{
+		Id:     id,
+		Code:   204,
+		Detail: "",
+		Status: http.StatusText(204),
+	}
+}
+
+// Found generates a 30x response code.
+func Found(id, format string, a ...interface{}) error {
+	return &Error{
+		Id:     id,
+		Code:   302,
+		Detail: "",
+		Status: http.StatusText(302),
 	}
 }
